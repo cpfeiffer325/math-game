@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  resources :games, only: [:show]
 
-  root 'welcome#index'
+  root 'games#show'
 end
