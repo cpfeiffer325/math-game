@@ -1,10 +1,10 @@
 class GenerateRandomNumbers
-  arr = []
+  @arr = []
 
-  while arr.length < 5 do
+  while @arr.length < 5 do
     newNumber = rand(2..10)
-    unless arr.include?(newNumber)
-      arr.push(newNumber)
+    unless @arr.include?(newNumber)
+      @arr.push(newNumber)
     end
   end
 end
