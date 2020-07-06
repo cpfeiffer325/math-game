@@ -4,8 +4,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
+    col = (2...10).sort_by{rand}.slice(0,5)
+    row = (2...10).sort_by{rand}.slice(0,5)
 
+    @game = Game.new(game_params.merge({ column_values: col, row_values: row }))
     @game.save
     redirect_to @game
   end
