@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2020_07_04_234639) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "player_name"
     t.string "game_type"
-    t.integer "column_values"
-    t.integer "row_values"
+    t.json "column_values", default: "[]"
+    t.json "row_values", default: "[]"
   end
 
 end
