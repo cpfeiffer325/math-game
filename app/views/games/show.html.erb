@@ -1,8 +1,12 @@
 <section class="game">
   <div class="header">
     <h1>Mad Minute Math</h1>
-    <p>Hello <strong>Lilybug</strong>, I built this Math game for you :)</p>
-    <%= button_to "New Game", root_path, method: :get%>
+    <p>Hello <strong><%=@game.player_name%></strong>, I built this Math game for you :)</p>
+    <div class="button-menu">
+      <%= button_to "New User", root_path, method: :get%>
+      <%= button_to "Restart", @game, method: :get%>
+      <%= button_to "New Game", new_game_path, method: :get%>
+    </div>
   </div>
 
   <div class="content">
