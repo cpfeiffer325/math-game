@@ -7,11 +7,16 @@ body section.game {
   
   .header {
     text-align: center;
+
+    .button-menu {
+      padding: 25px 350px 0px 350px;
+      display: flex;
+      justify-content: space-evenly;
+    }
   }
   
   .content {
-    padding: 100px;
-    padding-right: 100px;
+    padding: 25px 100px 100px 100px;
     height: 60%;
     width: auto;
   }
