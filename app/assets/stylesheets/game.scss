@@ -39,9 +39,16 @@ body section.game {
       font-size: 40px;
     }
     
-    .answer {
+    .answer-correct {
       text-align: center;
       font-size: 40px;
+      color: green;
+    }
+    
+    .answer-false {
+      text-align: center;
+      font-size: 40px;
+      color: red;
     }
   }
   
