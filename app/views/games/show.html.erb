@@ -5,48 +5,28 @@
     <div class="button-menu">
       <%= button_to "New User", root_path, method: :get%>
       <%= button_to "Restart", @game, method: :get%>
-      <%= button_to "New Game", new_game_path, method: :get%>
+      <%= form_with model: @game, method: :post, url: games_path, local: true do |form| %>
+        <%= form.hidden_field :player_name, value: @game.player_name %>
+        <%= form.hidden_field :game_type, value: @game.game_type %>
+      <p>
+        <%= form.submit "Start New Game" %>
+      </p>
+      <% end %>
     </div>
   </div>
 
   <div class="content">
     <div class="grid-container">
       <div class="label">X</div>
-      <div class="label"><%=@game.column_values[0]%></div>
-      <div class="label"><%=@game.column_values[1]%></div>
-      <div class="label"><%=@game.column_values[2]%></div>
-      <div class="label"><%=@game.column_values[3]%></div>
-      <div class="label"><%=@game.column_values[4]%></div>
-      <div class="label"><%=@game.row_values[0]%></div>
-      <input id="cell_0_3" data-row="0" data-col="4" class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <div class="label"><%=@game.row_values[1]%></div>
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <div class="label"><%=@game.row_values[2]%></div>
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <div class="label"><%=@game.row_values[3]%></div>
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <div class="label"><%=@game.row_values[4]%></div>
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
-      <input class="answer" type="text">
+      <% @game.column_values.each do |value| %>
+      <div class="label"><%=value%></div>
+      <% end%>
+      <% @game.row_values.each do |rowVal| %>
+        <div class="label"><%=rowVal%></div>
+        <% @game.column_values.each do |colVal| %>
+          <input data-row=<%=rowVal%> data-col=<%=colVal%> class="answer" type="text">
+        <% end%>
+      <% end%>
     </div>
   </div>
 </section>
