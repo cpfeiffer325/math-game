@@ -40,21 +40,17 @@ body section.game {
       font-size: 40px;
     }
     
-    .answer-incomplete {
+    .answer {
       text-align: center;
       font-size: 40px;
       color: black;
     }
     
     .answer-correct {
-      text-align: center;
-      font-size: 40px;
       color: green;
     }
     
     .answer-incorrect {
-      text-align: center;
-      font-size: 40px;
       color: red;
     }
   }
