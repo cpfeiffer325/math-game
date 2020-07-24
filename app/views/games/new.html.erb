@@ -3,7 +3,9 @@
 <%= form_with model: @game, url: games_path, local: true do |form| %>
 <p>
   <%= form.label :player_name %><br>
-  <%= form.text_field :player_name %>
+  <%= form.fields_for :player do |pl| %>
+    <%= pl.text_field :name %>
+  <% end %>
 </p>
 
 <p>

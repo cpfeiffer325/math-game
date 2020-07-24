@@ -3,12 +3,14 @@
 <section class="game">
   <div class="header">
     <h1>Mad Minute Math</h1>
-    <p>Hello <strong><%=@game.player_name%></strong>, I built this Math game for you :)</p>
+    <p>Hello <strong><%=@player.name%></strong>, I built this Math game for you :)</p>
     <div class="button-menu">
       <%= button_to "New User", root_path, method: :get%>
       <%= button_to "Restart", @game, method: :get%>
       <%= form_with model: @game, method: :post, url: games_path, local: true do |form| %>
-        <%= form.hidden_field :player_name, value: @game.player_name %>
+        <%= form.fields_for :player do |pl| %>
+          <%= pl.hidden_field :player, value: @player.name %>
+        <% end %>
         <%= form.hidden_field :game_type, value: @game.game_type %>
       <p>
         <%= form.submit "Start New Game" %>
