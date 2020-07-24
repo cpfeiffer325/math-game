@@ -29,8 +29,7 @@ jQuery(() => {
     }
   }, 100);
 
-  
-  $('.answer').blur(function () { //.on to select the parent
+  $('.answer').blur(function () {
     const $this = $(this)
     const value = parseInt($this.val())
     const row = $this.data("row")
@@ -40,11 +39,6 @@ jQuery(() => {
     $this.addClass(correct ? "answer-correct" : "answer-incorrect")
     complete = $('.answer-correct').length === 25
   })
-
-  // let interval = setInterval()
-
-  // let stopTimer
-
 })
 
 // stats controller => game id, player name, complete time
