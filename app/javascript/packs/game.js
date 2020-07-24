@@ -7,16 +7,28 @@ function validateAnswer(row, col, res, operator) {
   }
 }
 
+function formatMinSec(elapsedTime) {
+  var minutes = Math.floor((elapsedTime% (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((elapsedTime% (1000 * 60)) / 1000);
+  return `${minutes} m :  ${seconds} s`
+}
+
 jQuery(() => { 
+  let complete = false
+  let finishTime = null
   let startTime = Date.now()
   setInterval(function () {
-    var elapsedTime = Date.now() - startTime
-  
-    var minutes = Math.floor((elapsedTime% (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((elapsedTime% (1000 * 60)) / 1000);
-  
-    $('.timer').text(`${minutes} m :  ${seconds} s`)
+    if (complete) {
+      if (!finishTime) {
+        finishTime = formatMinSec(Date.now() - startTime)
+      }
+      $('.timer').text(finishTime)
+    } else {
+      var elapsedTime = Date.now() - startTime
+      $('.timer').text(formatMinSec(elapsedTime))
+    }
   }, 100);
+
   
   $('.answer').blur(function () { //.on to select the parent
     const $this = $(this)
@@ -26,7 +38,7 @@ jQuery(() => {
     let correct = validateAnswer(row, col, value, "multiplication")
     $this.removeClass("answer-correct answer-incorrect")
     $this.addClass(correct ? "answer-correct" : "answer-incorrect")
-    // select all.answer-correct === 25 then clearInterval, extract value
+    complete = $('.answer-correct').length === 25
   })
 
   // let interval = setInterval()
@@ -36,4 +48,4 @@ jQuery(() => {
 })
 
 // stats controller => game id, player name, complete time
-
+// TODO determine how to set timeout once game is complete
