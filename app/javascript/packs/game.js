@@ -8,6 +8,16 @@ function validateAnswer(row, col, res, operator) {
 }
 
 jQuery(() => { 
+  let startTime = Date.now()
+  setInterval(function () {
+    var elapsedTime = Date.now() - startTime
+  
+    var minutes = Math.floor((elapsedTime% (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((elapsedTime% (1000 * 60)) / 1000);
+  
+    $('.timer').text(`${minutes} m :  ${seconds} s`)
+  }, 100);
+  
   $('.answer').blur(function () { //.on to select the parent
     const $this = $(this)
     const value = parseInt($this.val())
