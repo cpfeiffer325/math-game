@@ -16,11 +16,12 @@ class GamesController < ApplicationController
     @game.save
     redirect_to @game
   end
-
+  
   def show
     @game = Game.find(params[:id])
-    @player = Player.current
-    # @stats = Stats.find(params[:id])
+    @event = Event.create(game_id: @game.id, player_id: 1)
+    @player = Player.find(1)
+    # @highscores = Highscores.find(params[:id])
   end
 
   private
