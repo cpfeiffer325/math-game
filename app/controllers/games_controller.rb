@@ -14,13 +14,15 @@ class GamesController < ApplicationController
       }
     ))
     @game.save
+    @player = Player.new(player_params)
+    @player.save
     redirect_to @game
   end
   
   def show
     @game = Game.find(params[:id])
     @event = Event.create(game_id: @game.id, player_id: 1)
-    @player = Player.find(1)
+    @player = Player.last
     # @highscores = Highscores.find(params[:id])
   end
 
@@ -36,5 +38,9 @@ class GamesController < ApplicationController
       :column_values,
       :row_values,
     )
+  end
+
+  def player_params
+    params.permit(:name)
   end
 end

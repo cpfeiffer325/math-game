@@ -1,10 +1,10 @@
 <h1>New Game Creation</h1>
 
-<%= form_with model: @game, url: games_path, local: true do |form| %>
+<%= form_for @game, url: games_path, local: true do |form| %>
 <p>
-  <%= form.label :player_name %><br>
-  <%= form.fields_for :player do |pl| %>
-    <%= pl.text_field :name %>
+  <%= fields_for @player do |p| %>
+    <%= p.label :name %><br>
+    <%= p.text_field :name %>
   <% end %>
 </p>
 
