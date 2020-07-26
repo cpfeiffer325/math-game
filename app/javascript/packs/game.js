@@ -21,10 +21,11 @@ jQuery(() => {
     if (complete) {
       if (!finishTime) {
         finishTime = formatMinSec(Date.now() - startTime)
+        clearInterval()
       }
       $('.timer').text(finishTime)
     } else {
-      var elapsedTime = Date.now() - startTime
+      let elapsedTime = Date.now() - startTime
       $('.timer').text(formatMinSec(elapsedTime))
     }
   }, 100);
