@@ -14,16 +14,22 @@ class GamesController < ApplicationController
       }
     ))
     @game.save
+
     @player = Player.new(player_params)
     @player.save
+
+    @highscore = Highscore.new(game_id: @game.id)
+    @highscore.save
+
     redirect_to @game
   end
   
   def show
     @game = Game.find(params[:id])
-    @event = Event.create(game_id: @game.id, player_id: 1)
     @player = Player.last
-    # @highscores = Highscores.find(params[:id])
+    @event = Event.create(game_id: @game.id, player_id: @player.id)
+    @highscore = Highscore.select { |h| h.game_id == @game.id }
+    binding.pry
   end
 
   private
