@@ -1,6 +1,7 @@
 <%= javascript_pack_tag 'game'%>
 
 <section class="game">
+  <div data-event_id=<%=@event.id%> class="eventID" style="visibility: none">
   <div class="header">
     <h1>Mad Minute Math</h1>
     <p>Hello <strong><%=@player.name%></strong>, I built this Math game for you :)</p>

@@ -1,3 +1,5 @@
+const { ajax } = require("jquery");
+
 function validateAnswer(row, col, res, operator) {
   switch (operator) {
     case "multiplication":
@@ -15,6 +17,7 @@ function formatMinSec(elapsedTime) {
 
 jQuery(() => { 
   let complete = false
+  let dataSent
   let finishTime = null
   let startTime = Date.now()
   setInterval(function () {
@@ -38,8 +41,24 @@ jQuery(() => {
     let correct = validateAnswer(row, col, value, "multiplication")
     $this.removeClass("answer-correct answer-incorrect")
     $this.addClass(correct ? "answer-correct" : "answer-incorrect")
-    complete = $('.answer-correct').length === 25
+    complete = $('.answer-correct').length === 2
+    if (complete && !dataSent) {
+      let eventId = $('.eventID').data().event_id
+      console.log('eventId :>> ', eventId);
+      $.ajax({ 
+        url: `/events/${eventId}`,
+        type: 'Patch',
+        success: function(data){
+            alert('Success!')
+        }
+        , error: function(jqXHR, textStatus, err){
+            alert('text status '+textStatus+', err '+err)
+        }
+      })
+      dataSent = true
+    }
   })
+
 })
 
 // stats controller => game id, player name, complete time
