@@ -44,16 +44,15 @@ jQuery(() => {
     complete = $('.answer-correct').length === 2
     if (complete && !dataSent) {
       let eventId = $('.eventID').data().event_id
-      console.log('eventId :>> ', eventId);
       $.ajax({ 
         url: `/events/${eventId}`,
         type: 'Patch',
-        success: function(data){
-            alert('Success!')
-        }
-        , error: function(jqXHR, textStatus, err){
-            alert('text status '+textStatus+', err '+err)
-        }
+        // success: function(data){
+        //     alert(`Yay, you have finished the game`)
+        // }
+        // , error: function(jqXHR, textStatus, err){
+        //     alert('text status '+textStatus+', err '+err)
+        // }
       })
       dataSent = true
     }
