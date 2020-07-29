@@ -1,5 +1,6 @@
-class EventController < ApplicationController
-  def new
-    
+class EventsController < ApplicationController
+  def update
+    @event = Event.find(params[:id])
+    @event.game_time = Time.now - @event.created_at
   end
 end
