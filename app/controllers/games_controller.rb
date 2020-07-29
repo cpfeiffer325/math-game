@@ -29,7 +29,6 @@ class GamesController < ApplicationController
     @player = Player.last
     @event = Event.create(game_id: @game.id, player_id: @player.id)
     @highscore = Highscore.select { |h| h.game_id == @game.id }
-    binding.pry
   end
 
   private
