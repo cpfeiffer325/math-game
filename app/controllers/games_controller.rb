@@ -4,15 +4,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @col = random_values
-    @row = random_values
-
-    @game = Game.new(game_params.merge(
-      { 
-        column_values: @col, 
-        row_values: @row 
-      }
-    ))
+    @game = Game.new(game_params.merge(row_col_values))
     @game.save
 
     @player = Player.new(player_params)
@@ -26,8 +18,15 @@ class GamesController < ApplicationController
     @player = Player.last
     @event = Event.create(game_id: @game.id, player_id: @player.id)
   end
-
+  
   private
+
+  def row_col_values
+    {
+      column_values: random_values,
+      row_values: random_values,
+    }
+  end
 
   def random_values
     (2...10).sort_by { rand }.slice(0, 5)
