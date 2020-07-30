@@ -36,6 +36,9 @@
 
     <div class="highscores">
       <h1>Highscores</h1>
+      <%=@game.filter_highscore_events.each do |highscore| %>
+        <p><%="Player ID: #{Player.find(highscore.player_id).name} Time: #{highscore.game_time}"%></p>
+      <% end%>
     </div>
   </div>
 </section>
