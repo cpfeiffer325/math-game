@@ -1,40 +1,41 @@
 <%= javascript_pack_tag 'game'%>
 
 <section class="game">
-  <div data-event_id=<%=@event.id%> class="eventID" style="visibility: none">
   <div class="header">
     <h1>Mad Minute Math</h1>
     <p>Hello <strong><%=@player.name%></strong>, I built this Math game for you :)</p>
+    <div class="timer">0 : 00</div>
+  </div>
+  <div data-event_id=<%=@event.id%> class="gameEvent" style="visibility: none">
     <div class="button-menu">
-      <%= button_to "New User", root_path, method: :get%>
-      <%= button_to "Restart", @game, method: :get%>
+      <div><%= button_to "New User", root_path, method: :get%></div>
+      <div><%= button_to "Restart", @game, method: :get%></div>
       <%= form_with model: @game, method: :post, url: games_path, local: true do |form| %>
         <%= form.fields_for :player do |pl| %>
           <%= pl.hidden_field :player, value: @player.name %>
         <% end %>
         <%= form.hidden_field :game_type, value: @game.game_type %>
-      <p>
-        <%= form.submit "Create New Game" %>
-      </p>
+        <div><%= form.submit "Create New Game" %></div>
       <% end %>
     </div>
-    <div class="timer">
-      0 : 00
-    </div>
-  </div>
 
-  <div class="content">
-    <div class="grid-container">
-      <div class="label">&times;</div>
-      <% @game.column_values.each do |value| %>
-      <div class="label"><%=value%></div>
-      <% end%>
-      <% @game.row_values.each do |rowVal| %>
-        <div class="label"><%=rowVal%></div>
-        <% @game.column_values.each do |colVal| %>
-          <input class="answer" data-row="<%=rowVal%>" data-col="<%=colVal%>" type="text">
+    <%# <div class="content"> %>
+      <div class="grid-container">
+        <div class="label">&times;</div>
+        <% @game.column_values.each do |value| %>
+        <div class="label"><%=value%></div>
         <% end%>
-      <% end%>
+        <% @game.row_values.each do |rowVal| %>
+          <div class="label"><%=rowVal%></div>
+          <% @game.column_values.each do |colVal| %>
+            <input class="answer" data-row="<%=rowVal%>" data-col="<%=colVal%>" type="text">
+          <% end%>
+        <% end%>
+      </div>
+    <%# </div> %>
+
+    <div class="highscores">
+      <h1>Highscores</h1>
     </div>
   </div>
 </section>

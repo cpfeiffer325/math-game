@@ -43,7 +43,7 @@ jQuery(() => {
     $this.addClass(correct ? "answer-correct" : "answer-incorrect")
     complete = $('.answer-correct').length === 2
     if (complete && !dataSent) {
-      let eventId = $('.eventID').data().event_id
+      let eventId = $('.gameEvent').data().event_id
       $.ajax({ 
         url: `/events/${eventId}`,
         type: 'Patch',
