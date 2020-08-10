@@ -19,26 +19,39 @@
       <% end %>
     </div>
 
-    <%# <div class="content"> %>
-      <div class="grid-container">
-        <div class="label">&times;</div>
-        <% @game.column_values.each do |value| %>
-        <div class="label"><%=value%></div>
+    <div class="grid-container">
+      <div class="label">&times;</div>
+      <% @game.column_values.each do |value| %>
+      <div class="label"><%=value%></div>
+      <% end%>
+      <% @game.row_values.each do |rowVal| %>
+        <div class="label"><%=rowVal%></div>
+        <% @game.column_values.each do |colVal| %>
+          <input class="answer" data-row="<%=rowVal%>" data-col="<%=colVal%>" type="text">
         <% end%>
-        <% @game.row_values.each do |rowVal| %>
-          <div class="label"><%=rowVal%></div>
-          <% @game.column_values.each do |colVal| %>
-            <input class="answer" data-row="<%=rowVal%>" data-col="<%=colVal%>" type="text">
-          <% end%>
-        <% end%>
-      </div>
-    <%# </div> %>
+      <% end%>
+    </div>
 
     <div class="highscores">
       <h1>Highscores</h1>
-      <% @game.filter_highscore_events.each do |highscore| %>
-        <p><%= "Player ID: #{Player.find(highscore.player_id).name} Time: #{highscore.game_time}"%></p>
-      <% end%>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Game Time</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @game.filter_highscore_events.each do |highscore| %>
+            <tr>
+              <td><%= Player.find(highscore.player_id).name %></td>
+              <td><%= "%02d:%02d" % [highscore.game_time / 60 % 60, highscore.game_time % 60] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
