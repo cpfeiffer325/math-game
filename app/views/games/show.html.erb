@@ -11,8 +11,8 @@
       <div><%= button_to "New User", root_path, method: :get%></div>
       <div><%= button_to "Restart", @game, method: :get%></div>
       <%= form_with model: @game, method: :post, url: games_path, local: true do |form| %>
-        <%= form.fields_for :player do |pl| %>
-          <%= pl.hidden_field :player, value: @player.name %>
+        <%= form.fields_for @player do |p| %>
+          <%= p.hidden_field :name, value: @player.name %>
         <% end %>
         <%= form.hidden_field :game_type, value: @game.game_type %>
         <div><%= form.submit "Create New Game" %></div>
