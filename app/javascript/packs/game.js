@@ -15,6 +15,36 @@ function formatMinSec(elapsedTime) {
   return `${minutes} m :  ${seconds} s`
 }
 
+function callUpdateHighscores(highscores) {
+  console.log(highscores)
+  $(".highscore_row").remove()
+  rows = highscores.map(highscore => `
+    <tr>
+      <td>${ highscore.player_id }</td>
+      <td>${highscore.game_time}</td>
+    </tr>
+    `
+  ).join('')
+  $(".highscores").append(rows);
+
+}
+
+function callFuncToUpdateLeaderBoard() {
+  let gameId = $('.gameEvent').data().game_id
+  $.ajax({
+    url: `/leaderboards/${gameId}`,
+    type: 'Get',
+    success: function (data) {
+      callUpdateHighscores(data)
+      alert(JSON.stringify(data))
+      // alert(`Yay, you have finished the game in ${finishTime}`)
+    }
+    , error: function (jqXHR, textStatus, err) {
+      alert('text status ' + textStatus + ', err ' + err)
+    }
+  })
+}
+
 jQuery(() => { 
   let complete = false
   let dataSent
@@ -26,14 +56,15 @@ jQuery(() => {
         finishTime = formatMinSec(Date.now() - startTime)
         clearInterval()
       }
-      $('.timer').text(finishTime)
+      $(".timer").text(finishTime)
+      $(".highscores")
     } else {
       let elapsedTime = Date.now() - startTime
-      $('.timer').text(formatMinSec(elapsedTime))
+      $(".timer").text(formatMinSec(elapsedTime))
     }
   }, 100);
 
-  $('.answer').blur(function () {
+  $(".answer").blur(function () {
     const $this = $(this)
     const value = parseInt($this.val())
     const row = $this.data("row")
@@ -47,18 +78,15 @@ jQuery(() => {
       $.ajax({ 
         url: `/events/${eventId}`,
         type: 'Patch',
-        // success: function(data){
-        //     alert(`Yay, you have finished the game`)
-        // }
-        // , error: function(jqXHR, textStatus, err){
-        //     alert('text status '+textStatus+', err '+err)
-        // }
+        success: function(data){
+          callFuncToUpdateLeaderBoard()
+          // alert(`Yay, you have finished the game in ${finishTime}`)
+        }
+        , error: function(jqXHR, textStatus, err){
+          alert('text status '+textStatus+', err '+err)
+        }
       })
       dataSent = true
     }
   })
-
 })
-
-// stats controller => game id, player name, complete time
-// TODO determine how to set timeout once game is complete

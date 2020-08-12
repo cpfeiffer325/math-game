@@ -6,7 +6,11 @@
     <p>Hello <strong><%=@player.name%></strong>, I built this Math game for you :)</p>
     <div class="timer">0 : 00</div>
   </div>
-  <div data-event_id=<%=@event.id%> class="gameEvent" style="visibility: none">
+  <div 
+    data-event_id=<%=@event.id%>
+    data-game_id=<%=@game.id%>
+    class="gameEvent" style="visibility: none"
+  >
     <div class="button-menu">
       <div><%= button_to "New User", root_path, method: :get%></div>
       <div><%= button_to "Restart", @game, method: :get%></div>
@@ -45,7 +49,7 @@
         
         <tbody>
           <% @game.filter_highscore_events.each do |highscore| %>
-            <tr>
+            <tr class="highscore_row">
               <td><%= Player.find(highscore.player_id).name %></td>
               <td><%= "%02d:%02d" % [highscore.game_time / 60 % 60, highscore.game_time % 60] %></td>
             </tr>
