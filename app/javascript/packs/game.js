@@ -15,13 +15,22 @@ function formatMinSec(elapsedTime) {
   return `${minutes} m :  ${seconds} s`
 }
 
+function formatTime(time) {
+  minutes = Math.floor(time / 60) || 0
+  seconds =  time % 60
+  // return `  ${minutes} : ${seconds}`
+  return [minutes, seconds]
+    .map(v => v < 10 ? "0" + v : v)
+    .join(":")
+}
+
 function callUpdateHighscores(highscores) {
   console.log(highscores)
   $(".highscore_row").remove()
   rows = highscores.map(highscore => `
     <tr>
-      <td>${ highscore.player_id }</td>
-      <td>${highscore.game_time}</td>
+      <td>${highscore.player }</td>
+      <td>${formatTime(highscore.game_time)}</td>
     </tr>
     `
   ).join('')
