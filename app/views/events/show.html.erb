@@ -13,10 +13,10 @@
   >
     <div class="button-menu">
       <div><%= button_to "New User", root_path, method: :get%></div>
-      <div><%= button_to "Restart", @game, method: :get%></div>
-      <%= form_with model: @game, method: :post, url: games_path, local: true do |form| %>
+      <div><%= button_to "Restart", game_event_path, method: :get%></div>
+      <%= form_with model: @event, method: :post, url: game_events_path, local: true do |form| %>
         <%= form.fields_for @player do |p| %>
-          <%= p.hidden_field :name, value: @player.name %>
+          <%= p.hidden_field :player_id, value: @player.id %>
         <% end %>
         <%= form.hidden_field :game_type, value: @game.game_type %>
         <div><%= form.submit "Create New Game" %></div>
