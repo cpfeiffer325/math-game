@@ -1,4 +1,7 @@
 class Game < ApplicationRecord
+  has_many :events
+  has_many :players
+  
   def self.filter_highscore_events(game:)
     new(game: game)
   end

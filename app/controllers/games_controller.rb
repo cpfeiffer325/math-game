@@ -9,15 +9,10 @@ class GamesController < ApplicationController
 
     @player = Player.new(player_params)
     @player.save
-    redirect_to @game
-  end
-  
-  def show
-    # current_player = User.find_by_id(session[:current_player_id])
-    @game = Game.find(params[:id])
-    # @player = Player.find_by_id(current_player.id)
-    @player = Player.last
+
     @event = Event.create(game_id: @game.id, player_id: @player.id)
+    
+    redirect_to(game_event_path(@game, @event))
   end
   
   private
@@ -43,6 +38,7 @@ class GamesController < ApplicationController
 
   def player_params
     params.permit(
+      :player_id,
       :name
     )
   end

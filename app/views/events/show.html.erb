@@ -18,7 +18,9 @@
         <%= form.fields_for @player do |p| %>
           <%= p.hidden_field :player_id, value: @player.id %>
         <% end %>
-        <%= form.hidden_field :game_type, value: @game.game_type %>
+        <%= form.fields_for @game do |p| %>
+          <%= p.hidden_field :game_type, value: @game.game_type %>
+        <% end %>
         <div><%= form.submit "Create New Game" %></div>
       <% end %>
     </div>
