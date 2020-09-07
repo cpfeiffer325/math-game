@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
   def create
-    @game = Game.new
-    @player = Player.find(params[:event][:player][:player_id])
+    @game = Game.find(params[:game_id])
+    @player = Player.find(session[:current_player]["id"])
     @event = Event.create!(game_id: @game.id, player_id: @player.id)
+    
     redirect_to(game_event_path(@game, @event))
   end
   

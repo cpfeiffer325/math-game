@@ -3,7 +3,7 @@
 <section class="game">
   <div class="header">
     <h1>Mad Minute Math</h1>
-    <p>Hello <strong><%=@player.name%></strong>, I built this Math game for you :)</p>
+    <p>Hello <strong><%=@event.player.name%></strong>, I built this Math game for you :)</p>
     <div class="timer">0 : 00</div>
   </div>
   <div 
@@ -12,17 +12,12 @@
     class="gameEvent" style="visibility: none"
   >
     <div class="button-menu">
-      <div><%= button_to "New User", root_path, method: :get%></div>
-      <div><%= button_to "Restart", game_event_path, method: :get%></div>
-      <%= form_with model: @event, method: :post, url: game_events_path, local: true do |form| %>
-        <%= form.fields_for @player do |p| %>
-          <%= p.hidden_field :player_id, value: @player.id %>
-        <% end %>
-        <%= form.fields_for @game do |p| %>
-          <%= p.hidden_field :game_type, value: @game.game_type %>
-        <% end %>
-        <div><%= form.submit "Create New Game" %></div>
-      <% end %>
+      <div>
+        <%= button_to "Games", games_path, method: :get%>
+      </div>
+      <div>
+        <%= button_to "Change Name", root_path, method: :get%>
+      </div>
     </div>
 
     <div class="grid-container">

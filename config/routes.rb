@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :games, path: 'games', only: [:new, :create] do
-    resources :events, only: [:new, :create, :show, :update]
+  devise_for :players
+  resources :games, path: 'games', only: [:index, :show] do
+    resources :events, only: [:create, :show]
   end
+  resources :events, only: [:update]
   resources :players, only: [:new, :create]
   resources :leaderboards, only: [:show]
 
-  root 'games#new'
+  root 'players#new'
 end
