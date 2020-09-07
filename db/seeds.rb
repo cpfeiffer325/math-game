@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+20.times do |game|
+  Game.create!(
+    game_type: "multiplication",
+    column_values: (2...11).sort_by { rand }.slice(0, 5),
+    row_values: (2...11).sort_by { rand }.slice(0, 5)
+  )
+end
+
