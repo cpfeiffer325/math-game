@@ -1,0 +1,12 @@
+<div class="grid-container">
+  <div class="label">&times;</div>
+  <% @game.column_values.each do |value| %>
+  <div class="label"><%=value%></div>
+  <% end%>
+  <% @game.row_values.each do |rowVal| %>
+  <div class="label"><%=rowVal%></div>
+  <% @game.column_values.each do |colVal| %>
+  <input class="answer" data-row="<%=rowVal%>" data-col="<%=colVal%>" type="text">
+  <% end%>
+  <% end%>
+</div>

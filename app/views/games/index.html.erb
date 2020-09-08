@@ -1,7 +1,3 @@
 <h1>Here are all the games</h1>
 
-<% if session[:source] %>
-  <%= session[:player_name] %>
-<% end %>
-
-<%= render partial: 'game', collection: @games, locals: { name: @player["name"] } %>
+<%= render partial: 'game', collection: @games, locals: { id: @player["id"] } %>

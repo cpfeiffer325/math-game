@@ -3,9 +3,5 @@
   <p>Game Type: <%= game.game_type %></p>
   <p>Column Values: <%= game.column_values %></p>
   <p>Row Values: <%= game.row_values %></p>
-  <%= form_with model: @event, method: :post, url: game_events_path(game.id), local: true do |form| %>
-    <%= form.hidden_field :player_name, value: name %>
-    <%= form.hidden_field :game_type, value: game.game_type %>
-    <div><%= form.submit "Play Game" %></div>
-  <% end %>
+  <%= button_to 'Play Game', game_events_path(game.id) %>
 </div>

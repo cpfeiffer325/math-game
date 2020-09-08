@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @player = @event.player
     @game = @event.game
+    @last_game = Game.last.id
   end
 
   def update
