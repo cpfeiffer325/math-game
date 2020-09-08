@@ -25,7 +25,6 @@ function formatTime(time) {
 }
 
 function callUpdateHighscores(highscores) {
-  console.log(highscores)
   $(".highscore_row").remove()
   rows = highscores.map(highscore => `
     <tr>
@@ -45,8 +44,6 @@ function callFuncToUpdateLeaderBoard() {
     type: 'Get',
     success: function (data) {
       callUpdateHighscores(data)
-      alert(JSON.stringify(data))
-      // alert(`Yay, you have finished the game in ${finishTime}`)
     }
     , error: function (jqXHR, textStatus, err) {
       alert('text status ' + textStatus + ', err ' + err)
@@ -89,7 +86,6 @@ jQuery(() => {
         type: 'Patch',
         success: function(data){
           callFuncToUpdateLeaderBoard()
-          // alert(`Yay, you have finished the game in ${finishTime}`)
         }
         , error: function(jqXHR, textStatus, err){
           alert('text status '+textStatus+', err '+err)
