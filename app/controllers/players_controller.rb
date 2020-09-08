@@ -4,7 +4,9 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params)
+    @player = Player.create(player_params)
+    session[:current_player] = @player
+    redirect_to games_path
   end
 
   private
