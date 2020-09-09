@@ -26,8 +26,10 @@ function formatTime(time) {
 
 function callUpdateHighscores(highscores) {
   $(".highscore_row").remove()
-  rows = highscores.map(highscore => `
-    <tr>
+  
+  rows = highscores.sort((a, b) => a.game_time - b.game_time).map((highscore, index) => `
+    <tr class="highscore_row">
+      <td>${index}</td>
       <td>${highscore.player }</td>
       <td>${formatTime(highscore.game_time)}</td>
     </tr>

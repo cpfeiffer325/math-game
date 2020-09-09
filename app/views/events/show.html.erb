@@ -40,15 +40,17 @@
       <table>
         <thead>
           <tr>
+            <th>Rank</th>
             <th>Name</th>
             <th>Game Time</th>
           </tr>
         </thead>
         
         <tbody>
-          <% @game.filter_highscore_events.each do |highscore| %>
+          <% @highscores.each.with_index(1) do |highscore, index| %>
             <tr class="highscore_row">
-              <td><%= Player.find(highscore.player_id).name %></td>
+              <td><%= index %></td>
+              <td><%= highscore.player.name %></td>
               <td><%= "%02d:%02d" % [highscore.game_time / 60 % 60, highscore.game_time % 60] %></td>
             </tr>
           <% end %>

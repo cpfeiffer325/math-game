@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @player = @event.player
     @game = @event.game
+    @highscores = filter_highscore_events(@game.events)
     @last_game = Game.last.id
   end
 
@@ -18,5 +19,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.game_time = Time.now - @event.created_at
     @event.save
+  end
+
+  private
+
+  def filter_highscore_events(events)
+    completed_games = events.select { |event| event.game_time != nil }
+    highscores = completed_games.sort_by { |event| event[:game_time] }
+    highscores
   end
 end
