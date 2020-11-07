@@ -26,7 +26,7 @@ function formatTime(time) {
 
 function callUpdateHighscores(highscores) {
   $(".highscore_row").remove()
-  
+
   rows = highscores.sort((a, b) => a.game_time - b.game_time).map((highscore, index) => `
     <tr class="highscore_row">
       <td>${index}</td>
@@ -53,7 +53,7 @@ function callFuncToUpdateLeaderBoard() {
   })
 }
 
-jQuery(() => { 
+jQuery(() => {
   let complete = false
   let dataSent
   let finishTime = null
@@ -77,13 +77,14 @@ jQuery(() => {
     const value = parseInt($this.val())
     const row = $this.data("row")
     const col = $this.data("col")
+    const operator = $this.data("game_type")
     let correct = validateAnswer(row, col, value, "multiplication")
     $this.removeClass("answer-correct answer-incorrect")
     $this.addClass(correct ? "answer-correct" : "answer-incorrect")
     complete = $('.answer-correct').length === 2
     if (complete && !dataSent) {
       let eventId = $('.gameEvent').data().event_id
-      $.ajax({ 
+      $.ajax({
         url: `/events/${eventId}`,
         type: 'Patch',
         success: function(data){
