@@ -27,7 +27,7 @@
     </div>
     <div class="timer">0 : 00</div>
   </div>
-  <div 
+  <div
     data-event_id=<%=@event.id%>
     data-game_id=<%=@game.id%>
     class="gameEvent" style="visibility: none"
@@ -45,7 +45,7 @@
             <th>Game Time</th>
           </tr>
         </thead>
-        
+
         <tbody>
           <% @highscores.each.with_index(1) do |highscore, index| %>
             <tr class="highscore_row">
