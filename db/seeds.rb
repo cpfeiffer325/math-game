@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do |game|
+5.times do |game|
   Game.create!(
     game_type: "multiplication",
     difficulty: 1,
-    column_values: (2...7).sort_by { rand }.slice(0, 5),
-    row_values: (2...7).sort_by { rand }.slice(0, 5)
+    column_values: (1...7).sort_by { rand }.slice(0, 5),
+    row_values: (1...7).sort_by { rand }.slice(0, 5)
   )
 end
 
@@ -45,7 +45,7 @@ end
 20.times do |game|
   Game.create!(
     game_type: "addition",
-    difficulty: 1,
+    difficulty: 2,
     column_values: (2...21).sort_by { rand }.slice(0, 5),
     row_values: (2...21).sort_by { rand }.slice(0, 5)
   )
@@ -54,7 +54,7 @@ end
 20.times do |game|
   Game.create!(
     game_type: "addition",
-    difficulty: 1,
+    difficulty: 3,
     column_values: (2...51).sort_by { rand }.slice(0, 5),
     row_values: (2...51).sort_by { rand }.slice(0, 5)
   )
