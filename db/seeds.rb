@@ -6,11 +6,56 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+10.times do |game|
+  Game.create!(
+    game_type: "multiplication",
+    difficulty: 1,
+    column_values: (2...7).sort_by { rand }.slice(0, 5),
+    row_values: (2...7).sort_by { rand }.slice(0, 5)
+  )
+end
+
 20.times do |game|
   Game.create!(
     game_type: "multiplication",
+    difficulty: 2,
     column_values: (2...11).sort_by { rand }.slice(0, 5),
     row_values: (2...11).sort_by { rand }.slice(0, 5)
   )
 end
 
+20.times do |game|
+  Game.create!(
+    game_type: "multiplication",
+    difficulty: 3,
+    column_values: (2...13).sort_by { rand }.slice(0, 5),
+    row_values: (2...13).sort_by { rand }.slice(0, 5)
+  )
+end
+
+20.times do |game|
+  Game.create!(
+    game_type: "addition",
+    difficulty: 1,
+    column_values: (2...11).sort_by { rand }.slice(0, 5),
+    row_values: (2...11).sort_by { rand }.slice(0, 5)
+  )
+end
+
+20.times do |game|
+  Game.create!(
+    game_type: "addition",
+    difficulty: 1,
+    column_values: (2...21).sort_by { rand }.slice(0, 5),
+    row_values: (2...21).sort_by { rand }.slice(0, 5)
+  )
+end
+
+20.times do |game|
+  Game.create!(
+    game_type: "addition",
+    difficulty: 1,
+    column_values: (2...51).sort_by { rand }.slice(0, 5),
+    row_values: (2...51).sort_by { rand }.slice(0, 5)
+  )
+end
