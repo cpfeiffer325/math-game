@@ -1,30 +1,28 @@
 <%= javascript_pack_tag 'game'%>
 
 <section class="game">
-  <div class="header">
-    <h1>Mad Minute Math</h1>
-    <p>Hello <strong><%=@event.player.name%></strong>, I built this Math game for you :)</p>
-    <div class="button-menu">
-      <div>
-        <%= button_to "Games", games_path, method: :get%>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Mad Minute Math</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" ><%= button_to "Games", games_path, method: :get%></a>
+        <a class="nav-link" ><%= button_to "Change Name", root_path, method: :get%></a>
+        <a class="nav-link" ><%= button_to 'Try Again', game_events_path(@game.id), method: :post %></a>
+        <% unless @game.id == 1 %>
+          <a class="nav-link" ><%= button_to 'Previous Game', game_events_path(@game.id - 1), method: :post %></a>
+        <% end %>
+        <% unless @game.id == @last_game %>
+          <a class="nav-link" ><%= button_to 'Next Game', game_events_path(@game.id + 1), method: :post %></a>
+          <% end %>
       </div>
-      <div>
-        <%= button_to "Change Name", root_path, method: :get%>
-      </div>
-      <div>
-        <%= button_to 'Try Again', game_events_path(@game.id), method: :post %>
-      </div>
-      <% unless @game.id == 1 %>
-      <div>
-        <%= button_to 'Previous Game', game_events_path(@game.id - 1), method: :post %>
-      </div>
-      <% end %>
-      <% unless @game.id == @last_game %>
-        <div>
-          <%= button_to 'Next Game', game_events_path(@game.id + 1), method: :post %>
-        </div>
-      <% end %>
     </div>
+  </nav>
+  <div class="header">
+    <p>Hello <strong><%=@event.player.name%></strong>, I built this Math game for you :)</p>
     <div class="timer">0 : 00</div>
   </div>
   <div
