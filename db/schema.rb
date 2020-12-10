@@ -29,14 +29,6 @@ ActiveRecord::Schema.define(version: 2020_11_07_052046) do
     t.string "difficulty"
   end
 
-  create_table "highscores", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "game_id"
-    t.string "game_time"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
