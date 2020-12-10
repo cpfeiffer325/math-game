@@ -78,7 +78,7 @@ jQuery(() => {
     const row = $this.data("row")
     const col = $this.data("col")
     const operator = $this.data("game_type")
-    let correct = validateAnswer(row, col, value, "multiplication")
+    let correct = validateAnswer(row, col, value, operator)
     $this.removeClass("answer-correct answer-incorrect")
     $this.addClass(correct ? "answer-correct" : "answer-incorrect")
     complete = $('.answer-correct').length === 2
