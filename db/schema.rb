@@ -10,30 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_052046) do
-
-  create_table "events", force: :cascade do |t|
-    t.integer "game_time"
-    t.integer "player_id"
-    t.integer "game_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2020_12_12_232400) do
 
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "game_type"
+    t.integer "operator"
+    t.integer "difficulty"
+    t.integer "max_value"
+    t.integer "min_value"
+    t.integer "grid_size"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "duration"
+    t.integer "player_id"
+    t.integer "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.json "column_values", default: "[]"
     t.json "row_values", default: "[]"
-    t.string "difficulty"
   end
 
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "remember_created_at"
   end
 
 end
