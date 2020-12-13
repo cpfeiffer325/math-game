@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  resources :games, only: [:index] do
-    resources :matches, only: [:create, :show]
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'pages#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :games, only: [:index, :create]
+      resources :matches, only: [:create, :show, :update, :destroy]
+      resources :players, only: [:new, :create]
+    end
   end
 
-  resources :matches, only: [:update]
-  resources :players, only: [:new, :create]
-
-  root 'players#new'
+  get "*path", to: "pages#index", via: :all
 end

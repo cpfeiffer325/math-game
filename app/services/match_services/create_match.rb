@@ -2,17 +2,17 @@ module MatchServices
   class CreateMatch
     attr_reader :player, :game
 
-    def initialize (player:, game:)
+    def initialize(player:, game:)
       @player = player
       @game = game
     end
 
     def call
       Match.create(
-        player: player, 
+        player: player,
         game: game,
         column_values: generate_values,
-        row_values: generate_values
+        row_values: generate_values,
       )
     end
 
