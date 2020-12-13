@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class MatchesController < ApplicationController
   def create
     @game = Game.find(params[:game_id])
     @player = Player.find(session[:current_player]["id"])
