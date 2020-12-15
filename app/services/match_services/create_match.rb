@@ -9,8 +9,8 @@ module MatchServices
 
     def call
       Match.create(
-        player: player,
-        game: game,
+        player_id: player.id,
+        game_id: game.id,
         column_values: generate_values,
         row_values: generate_values,
       )
