@@ -4,7 +4,7 @@ module Api
       protect_from_forgery with: :null_session
 
       def create
-        match = Match.new(match_params)
+        match = Match.new(match_params(create_params))
 
         if match.save
           render json: MatchSerializer.new(match).serialized_json
@@ -22,7 +22,7 @@ module Api
       def update
         match = Match.find(params[:id])
 
-        if match.update(match_params)
+        if match.update(match_params(update_params))
           render json: MatchSerializer.new(match).serialized_json
         else
           render json: { error: match.errors.messages }, status: 422
@@ -41,14 +41,23 @@ module Api
 
       private
 
-      def match_params
-        params.require(:match).permit(
-          :duration,
+      def match_params(*permitted_params)
+        params.require(:match).permit(permitted_params)
+      end
+
+      def create_params
+        [
           :game_id,
-          :player_id,
-          :column_values,
-          :row_values
-        )
+          :player_id
+        ]
+      end
+
+      def update_params
+        [
+          :duration,
+          column_values: [],
+          row_values: []
+        ]
       end
 
       # def filter_highscore_events(events)
