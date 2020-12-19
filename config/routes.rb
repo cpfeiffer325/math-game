@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :games, only: [:index, :create]
       resources :matches, only: [:create, :show, :update, :destroy]
-      resources :players, only: [:new, :create]
+      resources :players, only: [:index, :new, :create, :show]
     end
   end
 
