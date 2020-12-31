@@ -2,7 +2,13 @@ module Api
   module V1
     class PlayersController < ApplicationController
       protect_from_forgery with: :null_session
-      
+
+      def index
+        players = Player.all
+
+        render json: PlayerSerializer.new(players).serialized_json
+      end
+
       def create
         player = Player.new(player_params)
 
