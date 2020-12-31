@@ -6,11 +6,11 @@ import Timer from './Timer'
 
 export default function Game() {
   const newGame = () => {
-    
+    console.log('Lets start a new game!');
   }
 
   const startGame = () => {
-    
+    console.log('Lets start this game!');
   }
 
   return (
@@ -18,8 +18,8 @@ export default function Game() {
       <Timer/>
       <GameGrid/>
       <div style={{ margin: "20px" }}>
-        <NewGameButton type={"primary"} onClick={newGame}/>
-        <StartGameButton type={"secondary"} onClick={startGame}/>
+        <NewGameButton type={"primary"} onNew={newGame}/>
+        <StartGameButton type={"secondary"} onStart={startGame}/>
       </div>
     </div>
   )
