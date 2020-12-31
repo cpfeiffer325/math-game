@@ -1,7 +1,9 @@
 import React from 'react'
-import NewGameButton from './NewGameButton'
-import StartGameButton from './StartGameButton'
+
 import GameGrid from './GameGrid'
+import NewGameButton from './NewGameButton'
+import NewPlayer from './NewPlayer'
+import StartGameButton from './StartGameButton'
 import Timer from './Timer'
 
 export default function Game() {
@@ -21,6 +23,7 @@ export default function Game() {
         <NewGameButton type={"primary"} onNew={newGame}/>
         <StartGameButton type={"secondary"} onStart={startGame}/>
       </div>
+      <NewPlayer />
     </div>
   )
 }
