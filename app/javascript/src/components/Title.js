@@ -8,7 +8,7 @@ export default function Title () {
         Mad Minute Math
       </Header>
       <Header as='h3' textAlign='center' color='black'>
-        Welcome to the game Lilybug
+        Hello Lilybug, I built this Math game for you :)
       </Header>
     </div>
   )
