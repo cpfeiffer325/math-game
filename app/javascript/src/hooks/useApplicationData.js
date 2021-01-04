@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function createApplicationData() {
+export default function useApplicationData() {
 
   const saveNewPlayer = (playerName) => {
     return new Promise((resolve, reject) => {

@@ -7,12 +7,12 @@ import NewPlayer from './NewPlayer'
 import StartGameButton from './StartGameButton'
 import Timer from './Timer'
 
-import createApplicationData from '../hooks/createApplicationData'
+import useApplicationData from '../hooks/useApplicationData'
 
 export default function Game() {
   const {
     saveNewPlayer
-  } = createApplicationData()
+  } = useApplicationData()
 
   const [state, setState] = useState({
     player: "",
