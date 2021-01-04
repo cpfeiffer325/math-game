@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Input, Modal } from 'semantic-ui-react'
 
 function reducer(state, action) {
@@ -12,12 +12,20 @@ function reducer(state, action) {
   }
 }
 
-export default function NewPlayer() {
+export default function NewPlayer({
+  name: propName,
+  saveNewPlayer
+}) {
   const [state, dispatch] = React.useReducer(reducer, {
     open: false,
     size: undefined,
   })
   const { open, size } = state
+  const [name, setName] = useState(propName)
+
+  const save = () => {
+    saveNewPlayer(name)
+  }
 
   return (
     <>
@@ -26,17 +34,21 @@ export default function NewPlayer() {
       </Button>
 
       <Modal
-        show={true}
         size={size}
         open={open}
         onClose={() => dispatch({ type: 'close' })}
       >
         <Modal.Header>What is your player name?</Modal.Header>
-        <Modal.Content>
-          <Input/>
+        <Modal.Content autoComplete="off" onSubmit={event => event.preventDefault()}>
+          <Input
+            name="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
         </Modal.Content>
         <Modal.Actions>
-          <Button positive onClick={() => dispatch({ type: 'close' })}>
+          <Button positive onClick={() => dispatch({ type: 'close' })} onClick={save} >
+            {console.log('name >> ', name)}
             Create Player
           </Button>
         </Modal.Actions>
