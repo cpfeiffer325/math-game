@@ -21,7 +21,7 @@ export default function NewPlayer({
     size: undefined,
   })
   const { open, size } = state
-  const [name, setName] = useState(propName)
+  const [name, setName] = useState(propName || "")
 
   const save = () => {
     saveNewPlayer(name)
@@ -30,7 +30,7 @@ export default function NewPlayer({
   return (
     <>
       <Button onClick={() => dispatch({ type: 'open', size: 'tiny' })}>
-        Tiny
+        Input Player Name
       </Button>
 
       <Modal
