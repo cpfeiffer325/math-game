@@ -2,7 +2,7 @@ import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import Game from './Game'
 
-export default function GameContainer () {
+export default function GamesContainer () {
 
   const game = <Game/>
   

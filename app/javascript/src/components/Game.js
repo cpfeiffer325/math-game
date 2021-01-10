@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React from 'react'
 
 import GameGrid from './GameGrid'
 import NewGameButton from './NewGameButton'
@@ -11,14 +10,11 @@ import useApplicationData from '../hooks/useApplicationData'
 
 export default function Game() {
   const {
-    saveNewPlayer
+    saveNewPlayer,
+    state
   } = useApplicationData()
 
-  const [state, setState] = useState({
-    player: "",
-  })
-
-  const newGame = () => {
+  const createNewGame = () => {
     console.log('Lets start a new game!');
   }
 
@@ -32,7 +28,7 @@ export default function Game() {
       <Timer/>
       <GameGrid/>
       <div style={{ margin: "20px" }}>
-        <NewGameButton type={"primary"} onNew={newGame}/>
+        <NewGameButton type={"primary"} onNew={createNewGame}/>
         <StartGameButton type={"secondary"} onStart={startGame}/>
       </div>
       <NewPlayer saveNewPlayer={saveNewPlayer}/>
