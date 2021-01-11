@@ -19,7 +19,7 @@ export default function useApplicationData() {
 
   const getMatches = (game_id) => {
     useEffect(() => {
-      axios.get(`/api/v1/matches`, { params: { game_id: gameid } })
+      axios.get(`/api/v1/matches`, { params: { game_id: game_id } })
         .then(({ data: matches }) => {
           setState(() => ({ matches }))
         })
