@@ -10,16 +10,16 @@ export default function Game() {
       <Grid.Row columns={6}>
         x
         {col_values.map((val) => (
-          <Grid.Column>
+          <Grid.Column key={val}>
             {val}
           </Grid.Column>
         ))}
       </Grid.Row>
       {row_values.map((x) => (
-        <Grid.Row columns={6}>
+        <Grid.Row columns={6} key={x}>
           {x}
           {col_values.map((y) =>
-            <Grid.Column>
+            <Grid.Column key={y}>
               <Input style={{ width: 100, height: 100, textAlign: "center", fontSize: "40px", padding: 0 }} />
             </Grid.Column>
           )}
