@@ -1,17 +1,65 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    player: null,
-    name: ""
+    game: {},
+    games: [],
+    match: {},
+    matches: [],
+    player: null
   })
 
-  const saveNewPlayer = (playerName) => {
+  useEffect(() => {
+    axios.get(`/api/v1/games`)
+      .then(({ data: games }) => {
+        setState(() => ({ games }))
+      })
+  }, [])
+
+  const getMatches = (game_id) => {
+    useEffect(() => {
+      axios.get(`/api/v1/matches`, { params: { game_id: gameid } })
+        .then(({ data: matches }) => {
+          setState(() => ({ matches }))
+        })
+    }, [])
+  }
+
+  const createPlayer = (playerName) => {
     return new Promise((resolve, reject) => {
       axios.post(`/api/v1/players`, { name: playerName })
         .then(response => {
-          setState({player: response.data, name: response.data.name })
+          setState(() => ({ player }))
+          resolve()
+        })
+        .catch(res => {
+          reject()
+        })
+    })
+  }
+  const createMatch = (game_id, player_id, name) => {
+    if (player == null) {
+      createPlayer(name)
+    }
+    getMatches
+
+    return new Promise((resolve, reject) => {
+      axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player_id })
+        .then(response => {
+          setState(() => ({ match }))
+          resolve()
+        })
+        .catch(res => {
+          reject()
+        })
+    })
+  }
+  
+  const completeMatch = (id, duration) => {
+    return new Promise((resolve, reject) => {
+      axios.patch(`/api/v1/matches${id}`, { duration: duration })
+        .then(response => {
           resolve()
         })
         .catch(res => {
@@ -21,7 +69,9 @@ export default function useApplicationData() {
   }
 
   return {
-    saveNewPlayer,
+    createMatch,
+    completeMatch, 
     state
   }
 }
+
