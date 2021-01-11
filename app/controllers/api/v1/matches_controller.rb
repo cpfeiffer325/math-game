@@ -3,9 +3,15 @@ module Api
     class MatchesController < ApplicationController
       protect_from_forgery with: :null_session
 
+      def index
+        matches = Match.where(game_id: params[:game_id])
+
+        render json: MatchSerializer.new(matches).serialized_json
+      end
+
       def create
         game = Game.find(params[:game_id])
-        player = Game.find(params[:player_id])
+        player = Player.find(params[:player_id])
         match_service = MatchServices::CreateMatch.new(game: game, player: player)
         match = match_service.call
 
