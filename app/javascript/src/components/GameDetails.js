@@ -3,76 +3,46 @@ import { Dropdown, Grid, Header, Input } from 'semantic-ui-react'
 
 import StartGameButton from './StartGameButton'
 
-const difficultyOptions = [
-  {
-    key: 'Easy',
-    text: 'Easy',
-    value: 'Easy',
-  }, 
-  {
-    key: 'Medium',
-    text: 'Medium',
-    value: 'Medium',
-  }, 
-  {
-    key: 'Hard',
-    text: 'Hard',
-    value: 'Hard',
-  },
-]
-
-const gridOptions = [
-  {
-    key: '4x4',
-    text: '4x4',
-    value: '4x4',
-  }, 
-  {
-    key: '5x5',
-    text: '5x5',
-    value: '5x5',
-  }, 
-  {
-    key: '6x6',
-    text: '6x6',
-    value: '6x6',
-  },
-  {
-    key: '7x7',
-    text: '7x7',
-    value: '7x7',
-  },
-]
-
-const typeOptions = [
-  {
-    key: '4x4',
-    text: '4x4',
-    value: '4x4',
-  }, 
-  {
-    key: '5x5',
-    text: '5x5',
-    value: '5x5',
-  }, 
-  {
-    key: '6x6',
-    text: '6x6',
-    value: '6x6',
-  },
-  {
-    key: '7x7',
-    text: '7x7',
-    value: '7x7',
-  },
-]
-
 export default function GameDetails ({
+  createMatch: createMatch,
+  completeMatch: completeMatch,
   difficulty: propDifficulty,
+  difficulties: difficulties,
+  games: games,
+  gameType: propGameType,
+  gameTypes: gameTypes,
+  gridSize: propGridSize,
+  gridSizes: gridSizes,
   name: propName,
 }) {
+  
+  const difficultyOptions = difficulties.map((difficulty) => (
+    {
+      key: difficulty,
+      text: difficulty,
+      value: difficulty
+    }
+  ))
+  
+  const gridOptions = gridSizes.map((gridSize) => (
+    {
+      key: gridSize,
+      text: gridSize,
+      value: gridSize
+    }
+  ))
+  
+  const typeOptions = gameTypes.map((gameType) => (
+    {
+      key: gameType,
+      text: gameType,
+      value: gameType
+    }
+  ))
 
-  const [difficulty, setDifficulty] = useState(propDifficulty || "Easy")
+  const [difficulty, setDifficulty] = useState(propDifficulty || null)
+  const [gameType, setGameType] = useState(propGameType || null)
+  const [gridSize, setGridSize] = useState(propGridSize || null)
   const [name, setName] = useState(propName || "")
 
   const startGame = () => {
@@ -106,23 +76,26 @@ export default function GameDetails ({
             fluid
             selection
             options={typeOptions}
+            value={gameType}
+            onChange={(event) => setGameType(event.target.outerText)}
           />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row columns={2}>
-          <Grid.Column>
-            <Header as='h3' textAlign='center'>
-              Game Difficulty
-            </Header>
-          </Grid.Column>
-          <Grid.Column>
-            <Dropdown
-              fluid
-              selection
-              options={difficultyOptions}
-              onChange={setDifficulty}
-              />
-          </Grid.Column>
+        <Grid.Column>
+          <Header as='h3' textAlign='center'>
+            Game Difficulty
+          </Header>
+        </Grid.Column>
+        <Grid.Column>
+          <Dropdown
+            fluid
+            selection
+            options={difficultyOptions}
+            value={difficulty}
+            onChange={(event) => setDifficulty(event.target.outerText)}
+          />
+        </Grid.Column>
       </Grid.Row >
       <Grid.Row columns={2}>
         <Grid.Column>
@@ -135,6 +108,8 @@ export default function GameDetails ({
             fluid
             selection
             options={gridOptions}
+            value={gridSize}
+            onChange={(event) => setGridSize(event.target.outerText)}
           />
         </Grid.Column>
       </Grid.Row>

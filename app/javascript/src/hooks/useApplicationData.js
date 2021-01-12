@@ -7,7 +7,7 @@ export default function useApplicationData() {
     games: [],
     match: {},
     matches: [],
-    player: null,
+    player: {},
     isLoading: true
   })
 
@@ -39,14 +39,14 @@ export default function useApplicationData() {
         })
     })
   }
-  const createMatch = (game_id, player_id, name) => {
-    if (player == null) {
+  const createMatch = (game_id, name, player) => {
+    if (player === null) {
       createPlayer(name)
     }
     getMatches
 
     return new Promise((resolve, reject) => {
-      axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player_id })
+      axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player.id })
         .then(response => {
           setState(() => ({ match }))
           resolve()

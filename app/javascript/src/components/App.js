@@ -50,6 +50,7 @@ export default function App () {
                   createMatch={createMatch}
                   completeMatch={completeMatch}
                   difficulties={difficulties}
+                  games={state.games.data}
                   gameTypes={gameTypes}
                   gridSizes={gridSizes}
                 />
