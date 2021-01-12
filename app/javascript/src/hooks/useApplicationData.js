@@ -7,13 +7,14 @@ export default function useApplicationData() {
     games: [],
     match: {},
     matches: [],
-    player: null
+    player: null,
+    isLoading: true
   })
 
   useEffect(() => {
     axios.get(`/api/v1/games`)
       .then(({ data: games }) => {
-        setState(() => ({ games }))
+        setState(() => ({ games, isLoading: false }))
       })
   }, [])
 

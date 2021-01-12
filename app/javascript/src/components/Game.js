@@ -2,7 +2,6 @@ import React from 'react'
 
 import GameGrid from './GameGrid'
 import NewGameButton from './NewGameButton'
-import NewPlayer from './NewPlayer'
 
 import Timer from './Timer'
 
