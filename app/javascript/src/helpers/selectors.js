@@ -5,7 +5,3 @@ export function getDifficulties(games) {
 export function getGameTypes(games) {
   return [...new Set(games.map(g => g.attributes.game_type))]
 }
-
-export function getGridSizes(games) {
-  return [...new Set(games.map(g => g.attributes.grid_size))]
-}
