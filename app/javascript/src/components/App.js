@@ -9,25 +9,17 @@ import Title from './Title'
 import { Grid, Segment } from 'semantic-ui-react'
 import useApplicationData from '../hooks/useApplicationData'
 
-import {
-  getDifficulties,
-  getGameTypes,
-  getGridSizes
-} from '../helpers/selectors'
-
 export default function App () {
   const { 
     completeMatch,
     createMatch,
+    createPlayer,
     state 
   } = useApplicationData()
 
   if (state.isLoading) {
     return <div className="App">Loading...</div>;
   } else {
-    let difficulties = getDifficulties(state.games.data)
-    let gameTypes = getGameTypes(state.games.data)
-    let gridSizes = getGridSizes(state.games.data)
     // const playerName = state
 
     return (
@@ -47,13 +39,13 @@ export default function App () {
             <Grid.Column width={6}>
               <Segment>
                 <GameDetails 
-                  createMatch={createMatch}
                   completeMatch={completeMatch}
-                  difficulties={difficulties}
+                  createMatch={createMatch}
+                  createPlayer={createPlayer}
+                  isCreating={state.isCreating}
                   games={state.games.data}
-                  gameTypes={gameTypes}
-                  gridSizes={gridSizes}
-                />
+                  />
+                  {console.log('state.isCreating :>> ', state)}
               </Segment>
               <Segment>
                 <Highscores />

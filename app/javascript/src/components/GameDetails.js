@@ -4,49 +4,43 @@ import { Dropdown, Grid, Header, Input } from 'semantic-ui-react'
 import StartGameButton from './StartGameButton'
 
 export default function GameDetails ({
-  createMatch: createMatch,
   completeMatch: completeMatch,
-  difficulty: propDifficulty,
-  difficulties: difficulties,
+  createMatch: createMatch,
+  createPlayer: createPlayer,
+  gameId: propGameId,
   games: games,
-  gameType: propGameType,
-  gameTypes: gameTypes,
-  gridSize: propGridSize,
-  gridSizes: gridSizes,
+  isCreating: isCreating,
   name: propName,
+  player: propPlayer
 }) {
   
-  const difficultyOptions = difficulties.map((difficulty) => (
+  const formatOutputs = (game) => {
+    const gameType = game.attributes.game_type.charAt(0).toUpperCase() + game.attributes.game_type.slice(1)
+    return `${gameType} (${game.attributes.difficulty})`
+  }
+
+  const gameOptions = games.map((game) => (
     {
-      key: difficulty,
-      text: difficulty,
-      value: difficulty
-    }
-  ))
-  
-  const gridOptions = gridSizes.map((gridSize) => (
-    {
-      key: gridSize,
-      text: gridSize,
-      value: gridSize
-    }
-  ))
-  
-  const typeOptions = gameTypes.map((gameType) => (
-    {
-      key: gameType,
-      text: gameType,
-      value: gameType
+      key: game.id,
+      text: formatOutputs(game),
+      value: game.id
     }
   ))
 
-  const [difficulty, setDifficulty] = useState(propDifficulty || null)
-  const [gameType, setGameType] = useState(propGameType || null)
-  const [gridSize, setGridSize] = useState(propGridSize || null)
+  const [gameId, setGameId] = useState(propGameId || null)
   const [name, setName] = useState(propName || "")
-
+  const [player, setPlayer] = useState(propPlayer || null)
+  
   const startGame = () => {
-    console.log('Lets start this game!');
+    if (isCreating) { // add promise resolve to hopefully fix this
+      const newPlayer = createPlayer(name)
+      setPlayer(newPlayer)
+    } else {
+      console.log('Lets start this game!');
+      createMatch(gameId, player.id)
+      console.log('gameId :>> ', gameId);
+      console.log('newPlayer.id :>> ', player.id);
+    }
   }
 
   return (
@@ -75,41 +69,9 @@ export default function GameDetails ({
           <Dropdown
             fluid
             selection
-            options={typeOptions}
-            value={gameType}
-            onChange={(event) => setGameType(event.target.outerText)}
-          />
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row columns={2}>
-        <Grid.Column>
-          <Header as='h3' textAlign='center'>
-            Game Difficulty
-          </Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Dropdown
-            fluid
-            selection
-            options={difficultyOptions}
-            value={difficulty}
-            onChange={(event) => setDifficulty(event.target.outerText)}
-          />
-        </Grid.Column>
-      </Grid.Row >
-      <Grid.Row columns={2}>
-        <Grid.Column>
-          <Header as='h3' textAlign='center'>
-            Game Grid Size
-          </Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Dropdown
-            fluid
-            selection
-            options={gridOptions}
-            value={gridSize}
-            onChange={(event) => setGridSize(event.target.outerText)}
+            value={gameId}
+            options={gameOptions}
+            onChange={(event, data) => setGameId(data.value)}
           />
         </Grid.Column>
       </Grid.Row>

@@ -8,7 +8,6 @@ import Timer from './Timer'
 // import useApplicationData from '../hooks/useApplicationData'
 
 export default function Game({ state }) {
-  console.log('state :>> ', state);
   const createNewGame = () => {
     console.log('Lets start a new game!');
   }

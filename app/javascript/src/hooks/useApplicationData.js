@@ -3,18 +3,18 @@ import axios from 'axios'
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    game: {},
     games: [],
     match: {},
     matches: [],
     player: {},
-    isLoading: true
+    isCreating: true,
+    isLoading: true,
   })
 
   useEffect(() => {
     axios.get(`/api/v1/games`)
       .then(({ data: games }) => {
-        setState(() => ({ games, isLoading: false }))
+        setState(() => ({ games, isLoading: false, isCreating: true }))
       })
   }, [])
 
@@ -30,8 +30,9 @@ export default function useApplicationData() {
   const createPlayer = (playerName) => {
     return new Promise((resolve, reject) => {
       axios.post(`/api/v1/players`, { name: playerName })
-        .then(response => {
-          setState(() => ({ player }))
+        .then(({ data: player }) => {
+          console.log('player :>> ', player);
+          setState(() => ({ ...state, player, isCreating: false }))
           resolve()
         })
         .catch(res => {
@@ -39,14 +40,13 @@ export default function useApplicationData() {
         })
     })
   }
-  const createMatch = (game_id, name, player) => {
-    if (player === null) {
-      createPlayer(name)
-    }
+  const createMatch = (game_id, player_id) => {
+    console.log('game_id :>> ', game_id);
+    console.log('player_id :>> ', player_id);
     getMatches
 
     return new Promise((resolve, reject) => {
-      axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player.id })
+      axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player_id })
         .then(response => {
           setState(() => ({ match }))
           resolve()
@@ -70,8 +70,9 @@ export default function useApplicationData() {
   }
 
   return {
-    createMatch,
     completeMatch, 
+    createMatch,
+    createPlayer,
     state
   }
 }
