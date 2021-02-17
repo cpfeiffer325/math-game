@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { Dropdown, Grid, Header, Input } from 'semantic-ui-react'
 
+import CreatePlayerButton from './CreatePlayerButton'
 import StartGameButton from './StartGameButton'
 
 export default function GameDetails ({
   completeMatch: completeMatch,
   createMatch: createMatch,
   createPlayer: createPlayer,
+  getMatches: getMatches,
   gameId: propGameId,
   games: games,
-  isCreating: isCreating,
   name: propName,
-  player: propPlayer
+  player: player
 }) {
   
   const formatOutputs = (game) => {
@@ -29,23 +30,19 @@ export default function GameDetails ({
 
   const [gameId, setGameId] = useState(propGameId || null)
   const [name, setName] = useState(propName || "")
-  const [player, setPlayer] = useState(propPlayer || null)
   
+  const generatePlayer = () => {
+    createPlayer(name)
+  }
+
   const startGame = () => {
-    if (isCreating) { // add promise resolve to hopefully fix this
-      const newPlayer = createPlayer(name)
-      setPlayer(newPlayer)
-    } else {
-      console.log('Lets start this game!');
-      createMatch(gameId, player.id)
-      console.log('gameId :>> ', gameId);
-      console.log('newPlayer.id :>> ', player.id);
-    }
+    console.log('Lets start this game!');
+    createMatch(gameId, player.id)
   }
 
   return (
     <Grid textAlign='center'>
-      <Grid.Row columns={2}>
+      <Grid.Row columns={3}>
         <Grid.Column>
           <Header as='h3' textAlign='center'>
             Player Name
@@ -58,8 +55,11 @@ export default function GameDetails ({
             onChange={(event) => setName(event.target.value)}
           />
         </Grid.Column>
+        <Grid.Column>
+          <CreatePlayerButton type={"green"} onCreate={generatePlayer} />
+        </Grid.Column>
       </Grid.Row>
-      <Grid.Row columns={2}>
+      <Grid.Row columns={3}>
         <Grid.Column>
           <Header as='h3' textAlign='center'>
             Game Type
@@ -71,12 +71,12 @@ export default function GameDetails ({
             selection
             value={gameId}
             options={gameOptions}
-            onChange={(event, data) => setGameId(data.value)}
-          />
+            onChange={(event, data) => { setGameId(data.value); getMatches(gameId) }}
+            />
         </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <StartGameButton type={"green"} onStart={startGame} />
+        <Grid.Column>
+          <StartGameButton type={"green"} onStart={startGame} />
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   )
