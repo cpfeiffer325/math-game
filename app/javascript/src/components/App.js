@@ -14,6 +14,7 @@ export default function App () {
     completeMatch,
     createMatch,
     createPlayer,
+    getMatches,
     state 
   } = useApplicationData()
 
@@ -42,13 +43,16 @@ export default function App () {
                   completeMatch={completeMatch}
                   createMatch={createMatch}
                   createPlayer={createPlayer}
+                  getMatches={getMatches}
                   isCreating={state.isCreating}
-                  games={state.games.data}
+                  games={state.games}
+                  player={state.player}
                   />
-                  {console.log('state.isCreating :>> ', state)}
+                  {console.log('state :>> ', state)}
               </Segment>
               <Segment>
-                <Highscores />
+                <Highscores 
+                />
               </Segment>
             </Grid.Column>
           </Grid.Row>
