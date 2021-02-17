@@ -7,14 +7,16 @@ export default function useApplicationData() {
     match: {},
     matches: [],
     player: {},
-    isCreating: true,
+    isCreatingPlayer: true,
+    isCreatingMatch: true,
     isLoading: true,
   })
 
   useEffect(() => {
     axios.get(`/api/v1/games`)
       .then(({ data: games }) => {
-        setState(() => ({ games, isLoading: false, isCreating: true }))
+        console.log('games :>> ', games);
+        setState(() => ({ ...state, games: games.data, isLoading: false, isCreatingPlayer: true, isCreatingMatch: true }))
       })
   }, [])
 
@@ -22,7 +24,7 @@ export default function useApplicationData() {
     useEffect(() => {
       axios.get(`/api/v1/matches`, { params: { game_id: game_id } })
         .then(({ data: matches }) => {
-          setState(() => ({ matches }))
+          setState(() => ({...state, matches: matches.data }))
         })
     }, [])
   }
@@ -31,8 +33,7 @@ export default function useApplicationData() {
     return new Promise((resolve, reject) => {
       axios.post(`/api/v1/players`, { name: playerName })
         .then(({ data: player }) => {
-          console.log('player :>> ', player);
-          setState(() => ({ ...state, player, isCreating: false }))
+          setState(() => ({ ...state, player: player.data, isCreatingPlayer: false }))
           resolve()
         })
         .catch(res => {
@@ -40,20 +41,17 @@ export default function useApplicationData() {
         })
     })
   }
+  
   const createMatch = (game_id, player_id) => {
-    console.log('game_id :>> ', game_id);
-    console.log('player_id :>> ', player_id);
-    getMatches
-
     return new Promise((resolve, reject) => {
       axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player_id })
-        .then(response => {
-          setState(() => ({ match }))
-          resolve()
-        })
-        .catch(res => {
-          reject()
-        })
+      .then(({ data: match }) => {
+        setState(() => ({ ...state, match: match.data, isCreatingMatch: false }))
+        resolve()
+      })
+      .catch(res => {
+        reject()
+      })
     })
   }
   
@@ -73,6 +71,7 @@ export default function useApplicationData() {
     completeMatch, 
     createMatch,
     createPlayer,
+    getMatches,
     state
   }
 }
