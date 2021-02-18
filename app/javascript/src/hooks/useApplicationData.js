@@ -15,18 +15,21 @@ export default function useApplicationData() {
   useEffect(() => {
     axios.get(`/api/v1/games`)
       .then(({ data: games }) => {
-        console.log('games :>> ', games);
         setState(() => ({ ...state, games: games.data, isLoading: false, isCreatingPlayer: true, isCreatingMatch: true }))
       })
   }, [])
 
   const getMatches = (game_id) => {
-    useEffect(() => {
+    return new Promise((resolve, reject) => {
       axios.get(`/api/v1/matches`, { params: { game_id: game_id } })
         .then(({ data: matches }) => {
           setState(() => ({...state, matches: matches.data }))
+          resolve()
         })
-    }, [])
+        .catch(res => {
+          reject()
+        })
+    })
   }
 
   const createPlayer = (playerName) => {

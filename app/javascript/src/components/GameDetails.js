@@ -39,6 +39,10 @@ export default function GameDetails ({
     console.log('Lets start this game!');
     createMatch(gameId, player.id)
   }
+  
+  const getGameMatches = (id) => {
+    getMatches(id)
+  }
 
   return (
     <Grid textAlign='center'>
@@ -71,7 +75,7 @@ export default function GameDetails ({
             selection
             value={gameId}
             options={gameOptions}
-            onChange={(event, data) => { setGameId(data.value); getMatches(gameId) }}
+            onChange={(event, data) => { setGameId(data.value); getGameMatches(data.value) }}
             />
         </Grid.Column>
         <Grid.Column>
