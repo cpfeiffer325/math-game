@@ -1,13 +1,21 @@
 import React from 'react'
 import { Grid, Image, Input } from 'semantic-ui-react'
 
-const col_values = [1,2,3,4,5]
-const row_values = [5,6,7,8,9]
+let col_values = [1,2,3,4,5]
+let row_values = [5,6,7,8,9]
 
-export default function Game() {
+export default function GameGrid({ match: match }) {
+  if (Object.keys(match).length === 0) {
+    console.log('no match')
+  } else {
+    console.log('game :>> ', match);
+    col_values = match.attributes.column_values
+    row_values = match.attributes.row_values
+  }
   return (
     <Grid>
       <Grid.Row columns={6}>
+        {/* {game.attributes.} */}
         x
         {col_values.map((val) => (
           <Grid.Column key={val}>

@@ -21,7 +21,6 @@ export default function App () {
   if (state.isLoading) {
     return <div className="App">Loading...</div>;
   } else {
-    // const playerName = state
 
     return (
       <div style={{margin: "20px"}}>
@@ -34,7 +33,10 @@ export default function App () {
           <Grid.Row columns={3}>
             <Grid.Column width={10}>
               <Segment>
-                <Game />
+                <Game
+                  match={state.match}
+                />
+                {/* {console.log('state :>> ', state)} */}
               </Segment>
             </Grid.Column>
             <Grid.Column width={6}>
@@ -48,7 +50,6 @@ export default function App () {
                   games={state.games}
                   player={state.player}
                   />
-                  {console.log('state :>> ', state)}
               </Segment>
               <Segment>
                 <Highscores 
