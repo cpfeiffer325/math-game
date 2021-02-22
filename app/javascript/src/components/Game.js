@@ -7,7 +7,7 @@ import Timer from './Timer'
 
 // import useApplicationData from '../hooks/useApplicationData'
 
-export default function Game({ match: match }) {
+export default function Game({ game:game, match: match }) {
   const createNewGame = () => {
     console.log('Lets start a new game!');
   }
@@ -16,6 +16,7 @@ export default function Game({ match: match }) {
     <div style={{ margin: "20px" }}>
       <Timer/>
       <GameGrid
+        game={game}
         match={match}
       />
       <div style={{ margin: "20px" }}>

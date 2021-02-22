@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export default function useApplicationData() {
   const [state, setState] = useState({
+    game: {},
     games: [],
     match: {},
     matches: [],
@@ -49,12 +50,25 @@ export default function useApplicationData() {
     return new Promise((resolve, reject) => {
       axios.post(`/api/v1/matches`, { game_id: game_id, player_id: player_id })
       .then(({ data: match }) => {
-        setState(() => ({ ...state, match: match.data, isCreatingMatch: false }))
+        setState(() => ({ ...state, match: match.data, isCreatingMatch: false}))
         resolve()
       })
       .catch(res => {
         reject()
       })
+    })
+  }
+
+  const getGame = (game_id) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`/api/v1/games/${game_id}`)
+      .then(({ data: game }) => {
+          setState(() => ({ ...state, game: game.data }))
+          resolve()
+        })
+        .catch(res => {
+          reject()
+        })
     })
   }
   
@@ -75,6 +89,7 @@ export default function useApplicationData() {
     createMatch,
     createPlayer,
     getMatches,
+    getGame,
     state
   }
 }

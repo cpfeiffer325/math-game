@@ -15,6 +15,7 @@ export default function App () {
     createMatch,
     createPlayer,
     getMatches,
+    getGame,
     state 
   } = useApplicationData()
 
@@ -34,6 +35,7 @@ export default function App () {
             <Grid.Column width={10}>
               <Segment>
                 <Game
+                  game={state.game}
                   match={state.match}
                 />
                 {/* {console.log('state :>> ', state)} */}
@@ -49,6 +51,7 @@ export default function App () {
                   isCreating={state.isCreating}
                   games={state.games}
                   player={state.player}
+                  getGame={getGame}
                   />
               </Segment>
               <Segment>

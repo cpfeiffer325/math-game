@@ -5,14 +5,14 @@ import CreatePlayerButton from './CreatePlayerButton'
 import StartGameButton from './StartGameButton'
 
 export default function GameDetails ({
-  completeMatch: completeMatch,
   createMatch: createMatch,
   createPlayer: createPlayer,
   getMatches: getMatches,
   gameId: propGameId,
   games: games,
   name: propName,
-  player: player
+  player: player,
+  getGame: getGame
 }) {
   
   const formatOutputs = (game) => {
@@ -38,6 +38,10 @@ export default function GameDetails ({
   const startGame = () => {
     console.log('Lets start this game!');
     createMatch(gameId, player.id)
+  }
+  
+  const getGameDetails = (id) => {
+    getGame(id)
   }
   
   const getGameMatches = (id) => {
@@ -75,7 +79,7 @@ export default function GameDetails ({
             selection
             value={gameId}
             options={gameOptions}
-            onChange={(event, data) => { setGameId(data.value); getGameMatches(data.value) }}
+            onChange={(event, data) => { setGameId(data.value); getGameMatches(data.value); getGameDetails(data.value) }}
             />
         </Grid.Column>
         <Grid.Column>
