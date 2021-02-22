@@ -28,7 +28,7 @@ export default function App () {
         <Grid>
           <Grid.Row columns={1}>
             <Grid.Column width={16}>
-              <Title name="Lilybug"/>
+              <Title player={state.player}/>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
