@@ -19,6 +19,12 @@ module Api
         end
       end
 
+      def show
+        game = Game.find(params[:id])
+
+        render json: GameSerializer.new(game).serialized_json
+      end
+
       private
 
       def game_params
