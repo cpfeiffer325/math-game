@@ -6,8 +6,9 @@ let row_values = [5,6,7,8,9]
 
 export default function GameGrid({ 
     game: game, 
-    match: match 
+    match: match
   }) {
+
   if (Object.keys(match).length === 0) {
     console.log('no match')
   } else {
@@ -18,7 +19,7 @@ export default function GameGrid({
   return (
     <Grid>
       <Grid.Row columns={6}>
-        {/* {game.attributes.} */}
+        {/* {operator} */}
         x
         {col_values.map((val) => (
           <Grid.Column key={val}>

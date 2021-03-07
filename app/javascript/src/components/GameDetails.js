@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { Dropdown, Grid, Header, Input } from 'semantic-ui-react'
 
-import CreatePlayerButton from './CreatePlayerButton'
 import StartGameButton from './StartGameButton'
 
 export default function GameDetails ({
   createMatch: createMatch,
-  createPlayer: createPlayer,
   getMatches: getMatches,
   gameId: propGameId,
   games: games,
-  name: propName,
   player: player,
   getGame: getGame
 }) {
@@ -29,12 +26,7 @@ export default function GameDetails ({
   ))
 
   const [gameId, setGameId] = useState(propGameId || null)
-  const [name, setName] = useState(propName || "")
   
-  const generatePlayer = () => {
-    createPlayer(name)
-  }
-
   const startGame = () => {
     console.log('Lets start this game!');
     createMatch(gameId, player.id)
@@ -50,23 +42,6 @@ export default function GameDetails ({
 
   return (
     <Grid textAlign='center'>
-      <Grid.Row columns={3}>
-        <Grid.Column>
-          <Header as='h3' textAlign='center'>
-            Player Name
-          </Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Input
-            name="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <CreatePlayerButton type={"green"} onCreate={generatePlayer} />
-        </Grid.Column>
-      </Grid.Row>
       <Grid.Row columns={3}>
         <Grid.Column>
           <Header as='h3' textAlign='center'>
