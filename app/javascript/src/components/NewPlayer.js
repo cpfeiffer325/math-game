@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Input, Modal } from 'semantic-ui-react'
 
 function reducer(state, action) {
@@ -7,14 +7,15 @@ function reducer(state, action) {
       return { open: false }
     case 'open':
       return { open: true, size: action.size }
-    default:
+    default:  
       throw new Error('Unsupported action...')
   }
 }
 
 export default function NewPlayer({
+  createPlayer = createPlayer,
   name: propName,
-  saveNewPlayer
+  player: player
 }) {
   const [state, dispatch] = React.useReducer(reducer, {
     open: false,
@@ -24,13 +25,20 @@ export default function NewPlayer({
   const [name, setName] = useState(propName || "")
 
   const save = () => {
-    saveNewPlayer(name)
+    createPlayer(name)
+    dispatch({ type: 'close' })
   }
+
+  useEffect(() => {
+    if (Object.keys(player).length === 0) {
+      dispatch({ type: 'open', size: 'tiny' })
+    }
+  }, [])
 
   return (
     <>
       <Button onClick={() => dispatch({ type: 'open', size: 'tiny' })}>
-        Input Player Name
+        Change Player Name
       </Button>
 
       <Modal
@@ -38,7 +46,7 @@ export default function NewPlayer({
         open={open}
         onClose={() => dispatch({ type: 'close' })}
       >
-        <Modal.Header>What is your player name?</Modal.Header>
+        <Modal.Header>Please Enter your player name?</Modal.Header>
         <Modal.Content autoComplete="off" onSubmit={event => event.preventDefault()}>
           <Input
             name="name"
@@ -47,8 +55,7 @@ export default function NewPlayer({
           />
         </Modal.Content>
         <Modal.Actions>
-          <Button positive onClick={() => dispatch({ type: 'close' })} onClick={save} >
-            {console.log('name >> ', name)}
+          <Button positive onClick={save} >
             Create Player
           </Button>
         </Modal.Actions>

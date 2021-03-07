@@ -37,6 +37,8 @@ export default function App () {
                 <Game
                   game={state.game}
                   match={state.match}
+                  createPlayer={createPlayer}
+                  player={state.player}
                 />
                 {/* {console.log('state :>> ', state)} */}
               </Segment>
