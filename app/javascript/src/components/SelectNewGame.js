@@ -32,7 +32,6 @@ export default function SelectNewGame({
   console.log('player :>> ', player);
   useEffect(() => {
     console.log('select game modal', Object.keys(player).length !== 0 && Object.keys(game).length === 0);
-    console.log('state :>> ', state);
     if (Object.keys(player).length !== 0 && Object.keys(game).length === 0) {
       dispatch({ type: 'open', size: 'tiny' })
     }

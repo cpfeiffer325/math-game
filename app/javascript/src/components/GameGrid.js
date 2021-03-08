@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Image, Input } from 'semantic-ui-react'
+import { Grid, Icon, Input } from 'semantic-ui-react'
 
 let col_values = [1,2,3,4,5]
 let row_values = [5,6,7,8,9]
@@ -13,20 +13,19 @@ export default function GameGrid({
   if (Object.keys(match).length === 0) {
     console.log('no match')
   } else {
-    console.log('game_type :>> ', game.attributes.game_type);
     if (game.attributes.game_type === "multiplication")
     col_values = match.attributes.column_values
     row_values = match.attributes.row_values
 
     switch (game.attributes.game_type) {
       case "addition":
-        operator = "+"
+        operator = <i className="big plus icon"></i>
         break
       case "multiplication":
-        operator = "x"
+        operator = <i className="big times icon"></i>
         break
       case "subtraction":
-        operator = "-"
+        operator = <i className="big minus icon"></i>
         break
     }
   }
