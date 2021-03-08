@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Dropdown, Modal } from 'semantic-ui-react'
 
-import StartGameButton from './StartGameButton'
+import StartGameButton from './Buttons/StartGameButton'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -68,7 +68,7 @@ export default function SelectNewGame({
   }
   return (
     <>
-      <Button onClick={() => dispatch({ type: 'open', size: 'tiny' })}>
+      <Button onClick={() => dispatch({ type: 'open', size: 'tiny' })} color="violet">
         Select New Game
       </Button>
 

@@ -39,7 +39,7 @@ export default function CreateNewPlayer({
 
   return (
     <>
-      <Button onClick={() => dispatch({ type: 'open', size: 'tiny' })}>
+      <Button onClick={() => dispatch({ type: 'open', size: 'tiny' })} color="orange">
         Change Player Name
       </Button>
 
