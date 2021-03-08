@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Input, Modal } from 'semantic-ui-react'
 
+import CreateNewPlayerButton from './Buttons/CreateNewPlayerButton'
+
 function reducer(state, action) {
   switch (action.type) {
     case 'close':
@@ -12,7 +14,7 @@ function reducer(state, action) {
   }
 }
 
-export default function NewPlayer({
+export default function CreateNewPlayer({
   createPlayer: createPlayer,
   name: propName,
   player: player
@@ -55,9 +57,7 @@ export default function NewPlayer({
           />
         </Modal.Content>
         <Modal.Actions>
-          <Button positive onClick={save} >
-            Create Player
-          </Button>
+          <CreateNewPlayerButton type={"green"} onCreate={save} />
         </Modal.Actions>
       </Modal>
     </>

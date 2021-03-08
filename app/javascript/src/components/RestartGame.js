@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RestartGameButton from './RestartGameButton'
+import RestartGameButton from './Buttons/RestartGameButton'
 
 export default function RestartGame({ 
   createMatch: createMatch,

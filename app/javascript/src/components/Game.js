@@ -1,7 +1,7 @@
 import React from 'react'
 
 import GameGrid from './GameGrid'
-import NewPlayer from './NewPlayer'
+import CreateNewPlayer from './CreateNewPlayer'
 import RestartGame from './RestartGame'
 import SelectNewGame from './SelectNewGame'
 
@@ -37,7 +37,7 @@ export default function Game({
           onNew={createNewGame}
           player={player}
           />
-        <NewPlayer
+        <CreateNewPlayer
           createPlayer={createPlayer}
           player={player}
           />
