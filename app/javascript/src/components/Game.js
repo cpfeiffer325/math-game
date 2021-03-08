@@ -2,7 +2,7 @@ import React from 'react'
 
 import GameGrid from './GameGrid'
 import NewPlayer from './NewPlayer'
-import RestartButton from './RestartButton'
+import RestartGame from './RestartGame'
 import SelectNewGame from './SelectNewGame'
 
 import Timer from './Timer'
@@ -31,9 +31,11 @@ export default function Game({
         match={match}
         />
       <div style={{ margin: "20px" }}>
-        <RestartButton 
-          type={"primary"} 
+        <RestartGame 
+          createMatch={createMatch}
+          game={game}
           onNew={createNewGame}
+          player={player}
           />
         <NewPlayer
           createPlayer={createPlayer}
