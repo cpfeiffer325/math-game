@@ -3,6 +3,7 @@ import { Grid, Image, Input } from 'semantic-ui-react'
 
 let col_values = [1,2,3,4,5]
 let row_values = [5,6,7,8,9]
+let operator = ""
 
 export default function GameGrid({ 
     game: game, 
@@ -13,14 +14,27 @@ export default function GameGrid({
     console.log('no match')
   } else {
     console.log('game_type :>> ', game.attributes.game_type);
+    if (game.attributes.game_type === "multiplication")
     col_values = match.attributes.column_values
     row_values = match.attributes.row_values
+
+    switch (game.attributes.game_type) {
+      case "addition":
+        operator = "+"
+        break
+      case "multiplication":
+        operator = "x"
+        break
+      case "subtraction":
+        operator = "-"
+        break
+    }
   }
+
   return (
     <Grid>
       <Grid.Row columns={6}>
-        {/* {operator} */}
-        x
+        {operator}
         {col_values.map((val) => (
           <Grid.Column key={val}>
             {val}
