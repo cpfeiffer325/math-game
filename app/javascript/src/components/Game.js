@@ -1,8 +1,9 @@
 import React from 'react'
 
 import GameGrid from './GameGrid'
-import NewGameButton from './NewGameButton'
 import NewPlayer from './NewPlayer'
+import RestartButton from './RestartButton'
+import SelectNewGame from './SelectNewGame'
 
 import Timer from './Timer'
 
@@ -12,7 +13,11 @@ export default function Game({
   createPlayer = createPlayer,
   game: game, 
   match: match, 
-  player: player 
+  player: player,
+  createMatch: createMatch,
+  getMatches: getMatches,
+  games: games,
+  getGame: getGame
 }) {
   const createNewGame = () => {
     console.log('Lets start a new game!');
@@ -24,15 +29,24 @@ export default function Game({
       <GameGrid
         game={game}
         match={match}
-      />
+        />
       <div style={{ margin: "20px" }}>
-        <NewGameButton 
+        <RestartButton 
           type={"primary"} 
           onNew={createNewGame}
-        />
+          />
         <NewPlayer
           createPlayer={createPlayer}
           player={player}
+          />
+        <SelectNewGame
+          game={game}
+          createPlayer={createPlayer}
+          player={player}
+          createMatch={createMatch}
+          getMatches={getMatches}
+          games={games}
+          getGame={getGame}
         />
       </div>
     </div>

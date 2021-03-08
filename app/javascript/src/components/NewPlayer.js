@@ -13,7 +13,7 @@ function reducer(state, action) {
 }
 
 export default function NewPlayer({
-  createPlayer = createPlayer,
+  createPlayer: createPlayer,
   name: propName,
   player: player
 }) {

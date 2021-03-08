@@ -39,6 +39,12 @@ export default function App () {
                   match={state.match}
                   createPlayer={createPlayer}
                   player={state.player}
+                  completeMatch={completeMatch}
+                  createMatch={createMatch}
+                  getMatches={getMatches}
+                  isCreating={state.isCreating}
+                  games={state.games}
+                  getGame={getGame}
                 />
                 {/* {console.log('state :>> ', state)} */}
               </Segment>
