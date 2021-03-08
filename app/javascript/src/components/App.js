@@ -3,7 +3,6 @@ import 'semantic-ui-css/semantic.min.css'
 
 import Game from './Game'
 import Highscores from './Highscores'
-import GameDetails from './GameDetails'
 import Title from './Title'
 
 import { Grid, Segment } from 'semantic-ui-react'
@@ -50,18 +49,6 @@ export default function App () {
               </Segment>
             </Grid.Column>
             <Grid.Column width={6}>
-              <Segment>
-                <GameDetails 
-                  completeMatch={completeMatch}
-                  createMatch={createMatch}
-                  createPlayer={createPlayer}
-                  getMatches={getMatches}
-                  isCreating={state.isCreating}
-                  games={state.games}
-                  player={state.player}
-                  getGame={getGame}
-                  />
-              </Segment>
               <Segment>
                 <Highscores 
                 />
