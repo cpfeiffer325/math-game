@@ -15,6 +15,7 @@ export default function Game({
   match: match, 
   player: player,
   createMatch: createMatch,
+  completeMatch: completeMatch,
   getMatches: getMatches,
   games: games,
   getGame: getGame
@@ -27,6 +28,7 @@ export default function Game({
     <div style={{ margin: "20px" }}>
       <Timer/>
       <GameGrid
+        completeMatch={completeMatch}
         game={game}
         match={match}
         />

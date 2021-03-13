@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Icon, Input } from 'semantic-ui-react'
+import { Grid, Input } from 'semantic-ui-react'
 
 let col_values = [1,2,3,4,5]
 let row_values = [5,6,7,8,9]
@@ -10,6 +10,7 @@ let operators = {
   "subtraction": (x, y) => x - y,
 }
 export default function GameGrid({ 
+    completeMatch: completeMatch,
     game: game, 
     match: match
   }) {
@@ -37,21 +38,24 @@ export default function GameGrid({
   const [results, setResults] = useState({})
 
   const checkResult = (value, x, y) => {
-    console.log('value, x, y :>> ', value, x, y);
     let answer = operators[game.attributes.game_type](x, y)
     let newObj = {...results}
     let key = `${x}_${y}`
-    console.log('newObj :>> ', newObj);
+
     if (answer == value) {
       newObj[key] = true
-      console.log('newObj :>> ', newObj);
       setResults(newObj)
     } else {
       delete newObj[key]
     }
-    {console.log('results >> ', results)}
-    if (Object.keys(newObj).length === 3) {
-      console.log('Yay I am SMRT:>> ');
+
+    if (Object.keys(newObj).length === 1) {
+      let duration = Date() - match.created_at
+      console.log('duration :>> ', duration);
+      console.log('Date() :>> ', Date());
+      console.log('match.created_at :>> ', match.attributes);
+      completeMatch(match.id, 65)
+      console.log('Yay I am SMRT:>> ')
     }
   }
 
@@ -71,7 +75,6 @@ export default function GameGrid({
           {col_values.map((y) =>
             <Grid.Column key={y}>
               <Input onChange={(e) => checkResult(e.target.value, x, y)} style={{ width: 100, height: 100, textAlign: "center", fontSize: "20px", padding: 0 }} />
-              {/* <Input onChange={(params) => {console.log('params :>> ', params.target.value, x, y)}} style={{ width: 100, height: 100, textAlign: "center", fontSize: "20px", padding: 0 }} /> */}
             </Grid.Column>
           )}
         </Grid.Row>
