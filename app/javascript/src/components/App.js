@@ -50,7 +50,8 @@ export default function App () {
             </Grid.Column>
             <Grid.Column width={6}>
               <Segment>
-                <Highscores 
+                <Highscores
+                  matches={state.matches}
                 />
               </Segment>
             </Grid.Column>

@@ -74,7 +74,7 @@ export default function useApplicationData() {
   
   const completeMatch = (id, duration) => {
     return new Promise((resolve, reject) => {
-      axios.patch(`/api/v1/matches${id}`, { duration: duration })
+      axios.patch(`/api/v1/matches/${id}`, { duration: duration })
         .then(response => {
           resolve()
         })
