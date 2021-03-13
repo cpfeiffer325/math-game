@@ -1,7 +1,15 @@
 import React from 'react'
 import { Header, Icon, Label, Menu, Table } from 'semantic-ui-react'
 
-export default function Highscores () {
+export default function Highscores ({
+  matches: matches
+}) {
+
+  let filteredMatches = []
+  if (matches !== undefined) {
+    filteredMatches = matches.filter(x => x.attributers.duration !== null)
+  }
+  
   return (
     <div>
       <Header as='h3' block>
@@ -18,13 +26,17 @@ export default function Highscores () {
         </Table.Header>
 
         <Table.Body>
-          <Table.Row>
-            <Table.Cell>
-              <Label ribbon>1</Label>
-            </Table.Cell>
-            <Table.Cell>Lily</Table.Cell>
-            <Table.Cell>0:53</Table.Cell>
-          </Table.Row>
+          {console.log('filteredMatches :>> ', filteredMatches)}
+          {filteredMatches.map((match) => {
+            console.log('match.player :>> ', match.player);
+            <Table.Row>
+              <Table.Cell>
+                <Label ribbon>1</Label>
+              </Table.Cell>
+              <Table.Cell>{match.player.name}</Table.Cell>
+              <Table.Cell>{match.duration}</Table.Cell>
+            </Table.Row>
+          })}
           <Table.Row>
             <Table.Cell>2</Table.Cell>
             <Table.Cell>Evelyn</Table.Cell>
