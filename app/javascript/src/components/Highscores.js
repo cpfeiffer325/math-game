@@ -6,9 +6,9 @@ export default function Highscores ({
 }) {
 
   let filteredMatches = []
-  if (matches !== undefined) {
-    filteredMatches = matches.filter(x => x.attributers.duration !== null)
-  }
+  // if (matches !== undefined) {
+  //   filteredMatches = matches.filter(x => x.attributers.duration !== null)
+  // }
   
   return (
     <div>
@@ -26,8 +26,8 @@ export default function Highscores ({
         </Table.Header>
 
         <Table.Body>
-          {console.log('filteredMatches :>> ', filteredMatches)}
-          {filteredMatches.map((match) => {
+          {console.log('filteredMatches :>> ', matches)}
+          {/* {filteredMatches.map((match) => {
             console.log('match.player :>> ', match.player);
             <Table.Row>
               <Table.Cell>
@@ -36,7 +36,14 @@ export default function Highscores ({
               <Table.Cell>{match.player.name}</Table.Cell>
               <Table.Cell>{match.duration}</Table.Cell>
             </Table.Row>
-          })}
+          })} */}
+          <Table.Row>
+            <Table.Cell>
+              <Label ribbon>1</Label>
+            </Table.Cell>
+            <Table.Cell>Lilybug</Table.Cell>
+            <Table.Cell>0:53</Table.Cell>
+          </Table.Row>
           <Table.Row>
             <Table.Cell>2</Table.Cell>
             <Table.Cell>Evelyn</Table.Cell>

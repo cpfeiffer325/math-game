@@ -12,6 +12,7 @@ let operators = {
 export default function GameGrid({ 
     completeMatch: completeMatch,
     game: game, 
+    getMatches: getMatches,
     match: match
   }) {
 
@@ -55,6 +56,8 @@ export default function GameGrid({
       console.log('Date() :>> ', Date());
       console.log('match.created_at :>> ', match.attributes);
       completeMatch(match.id, 65)
+      // Figure out how to delay so it gets the newest match as well
+      getMatches(game.id)
       console.log('Yay I am SMRT:>> ')
     }
   }

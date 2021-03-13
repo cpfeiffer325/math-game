@@ -10,15 +10,15 @@ import Timer from './Timer'
 // import useApplicationData from '../hooks/useApplicationData'
 
 export default function Game({ 
-  createPlayer = createPlayer,
-  game: game, 
-  match: match, 
-  player: player,
   createMatch: createMatch,
+  createPlayer = createPlayer,
   completeMatch: completeMatch,
-  getMatches: getMatches,
+  game: game, 
   games: games,
-  getGame: getGame
+  getGame: getGame,
+  getMatches: getMatches,
+  match: match, 
+  player: player
 }) {
   const createNewGame = () => {
     console.log('Lets start a new game!');
@@ -30,6 +30,7 @@ export default function Game({
       <GameGrid
         completeMatch={completeMatch}
         game={game}
+        getMatches={getMatches}
         match={match}
         />
       <div style={{ margin: "20px" }}>
@@ -44,13 +45,13 @@ export default function Game({
           player={player}
           />
         <SelectNewGame
-          game={game}
-          createPlayer={createPlayer}
-          player={player}
           createMatch={createMatch}
-          getMatches={getMatches}
+          createPlayer={createPlayer}
+          game={game}
           games={games}
           getGame={getGame}
+          getMatches={getMatches}
+          player={player}
         />
       </div>
     </div>
